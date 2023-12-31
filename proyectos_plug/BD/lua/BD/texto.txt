@@ -1,0 +1,13 @@
+Tables_in_tareas
+failed_jobs
+migrations
+password_resets
+personal_access_tokens
+proyectos
+tareas
+tiempos
+tipos_deUsuario
+tipos_proyectos
+user_has_proyectos
+user_has_tareas
+users

@@ -1,0 +1,39 @@
+#!/bin/bash
+function escribir_sql(){
+  echo "-- --defaults-group-suffix=$1" > /opt/lampp/htdocs/$1/sql.sql
+  echo "-- -t" >> /opt/lampp/htdocs/$1/sql.sql
+  echo "--" >> /opt/lampp/htdocs/$1/sql.sql
+  echo "create database $1;" >> /opt/lampp/htdocs/$1/sql.sql
+  echo "SELECT * FROM users;" >> /opt/lampp/htdocs/$1/sql.sql
+  echo "describe users;" >> /opt/lampp/htdocs/$1/sql.sql
+  echo "show tables;" >> /opt/lampp/htdocs/$1/sql.sql
+  echo " <leader>rs (ejecuta todo lo seleccionado en modo visual)" >> /opt/lampp/htdocs/$1/sql.sql
+  echo " <leader>rr (ejecuta la instruccion de la linea donde esta el cursor)">> /opt/lampp/htdocs/$1/sql.sql
+}
+function escribir_config_sql(){
+ echo "[client]" > /home/ariel/.my.cnf
+ echo "user = root" >> /home/ariel/.my.cnf
+ echo 'password = ""' >> /home/ariel/.my.cnf
+ echo "[client$1]" >> /home/ariel/.my.cnf
+ echo "database = $1" >> /home/ariel/.my.cnf
+}
+function mysql_declaracion(){
+ if [ -f /opt/lampp/htdocs/$1/sql.sql ];
+  then
+    escribir_sql;
+ fi
+ echo "nmap <leader>my :e /opt/lampp/htdocs/$1/sql.sql<CR>"  >> /home/ariel/.config/nvim/after/plugin/set_key_person.vim
+ escribir_config_sql
+}
+
+
+echo ":w" > /opt/lampp/htdocs/Session.vim
+echo "set tags=/opt/lampp/htdocs/tags" >> /opt/lampp/htdocs/Session.vim
+echo "set path+=/opt/lampp/htdocs/$1/" >>  /opt/lampp/htdocs/Session.vim
+echo "set path+=/opt/lampp/htdocs/" >> /opt/lampp/htdocs/Session.vim
+echo ":cd /opt/lampp/htdocs/$1/" > /home/ariel/.config/nvim/after/plugin/set_key_person.vim
+
+echo "!ctags -R -f /opt/lampp/htdocs/tags -F /opt/lampp/htdocs/$1/" >>  /opt/lampp/htdocs/Session.vim
+mysql_declaracion
+konsole -e sudo ln -s /opt/lampp/var/mysql/mysql.sock /run/mysqld/mysqld.sock 
+konsole -e nvim /opt/lampp/htdocs/$1 

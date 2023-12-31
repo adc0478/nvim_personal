@@ -1,0 +1,4 @@
+{
+    "$schema": "/home/ariel/Descargas/phpactor/phpactor.schema.json",
+    "phpunit.enabled": true
+}
