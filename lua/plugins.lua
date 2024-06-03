@@ -9,6 +9,7 @@ return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
   -- Simple plugins can be specified as strings
+    
 
   -- Lazy loading:
   -- Load on specific commands
@@ -38,11 +39,15 @@ return require('packer').startup(function()
  -- use_rocks {'lua-resty-http', 'lpeg'}
 
     -- Plugins can have post-install/update hooks
- -- use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview'}
-
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = function()
+            local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+            ts_update()
+        end,
+    }
   -- Post-install/update hook with neovim command
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-  use  'nvim-treesitter/playground'
+ 
   -- Post-install/update hook with call of vimscript function with argument
   use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
 
@@ -60,9 +65,7 @@ return require('packer').startup(function()
   -- You can alias plugin names
   use {'dracula/vim', as = 'dracula'}
 
-use {
-  'nvim-treesitter/nvim-treesitter'
-}
+
 use {
   'nvim-lualine/lualine.nvim',
   requires = { 'kyazdani42/nvim-web-devicons', opt = true }
@@ -122,6 +125,8 @@ use {
 }
 use {'/home/ariel/.config/nvim/proyectos_plug/proyectos'}
 use {'/home/ariel/.config/nvim/proyectos_plug/BD'}
-use {'/home/ariel/.config/nvim/proyectos_plug/ventana'}
+use {'/home/ariel/.config/nvim/proyectos_plug/gemini'}
+
+use {"ellisonleao/glow.nvim", config = function() require("glow").setup() end}
 end)
 

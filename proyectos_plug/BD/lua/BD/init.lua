@@ -6,11 +6,36 @@ local pickers = require "telescope.pickers"
     local conf = require("telescope.config").values
 local obj = {}
 local M = {}
-function crearVentana()
+function crear_cabeceras (linea)
+    local out = {}
+    for str in string.gmatch(linea,"[^\t]+") do
+        table.insert(out,{header=str,accessor_key=str})
+    end
+    return out
+end
+function crear_estructura_datos (cabecera,linea)
+    local out = {}
+    local cadena = ""
+    local i = 1
+    for str in string.gmatch(linea,"[^\t]+") do
+        out[cabecera[i]['header']] = str
+        i = i+1
+    end
+    return out
+end
+
+function crearVentana2()
     local data ={}
     local archivo = io.open(obj:salida(obtener_proyecto()),'r')
+    local i = 1
+    local cabecera = {}
     for linea in archivo:lines() do
-        table.insert(data,linea)
+        if (i == 1) then
+            cabecera = crear_cabeceras(linea)
+        else
+            table.insert(data,crear_estructura_datos(cabecera,linea))
+        end
+        i=i+1
     end
     local bufnr = vim.api.nvim_create_buf(false, true)
     local opciones = {
@@ -25,12 +50,22 @@ function crearVentana()
 
     local win_id = vim.api.nvim_open_win(bufnr, true, opciones)
 
-    -- Puedes personalizar el contenido de la ventana
-    vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, data)
-
+   -- Puedes personalizar el contenido de la ventana
+   --
+   -- vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, cabecera)
+    rellenar(bufnr,cabecera,data)
     -- Puedes cerrar la ventana flotante con `vim.api.nvim_win_close(win_id, true)`
 end
+function rellenar(buffer,cabecera,datos)
+local NuiTable = require("nui.table")
+local tbl = NuiTable({
+  bufnr = buffer,
+  columns =cabecera,
+  data = datos,
+})
 
+tbl:render()
+end
 function obj:salida (proyecto)
     if proyecto == nil then
         return ""
@@ -74,7 +109,7 @@ pickers.new({}, {
             else
                 vim.api.nvim_command("!mariadb " .. proyecto .. " -e " .. choice .. ' > ' .. obj:salida(proyecto))
             end
-            crearVentana()
+            crearVentana2()
         end)
         return true
     end

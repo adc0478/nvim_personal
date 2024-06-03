@@ -7,4 +7,5 @@ vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
 vim.o.smartindent = true
 vim.o.autoindent = true
+vim.cmd("highlight MyFloatBg guibg=#6A5ACD")
 require "plugins"
