@@ -84,12 +84,7 @@ use {
     --'quangnguyen30192/cmp-nvim-ultisnips'
   --}
 --}
-use{
-  'SirVer/ultisnips',
-  requires = {
-   'honza/vim-snippets'
-  }
-}
+
 use "EdenEast/nightfox.nvim"
 use 'preservim/nerdtree'
 use 'noahfrederick/vim-laravel'

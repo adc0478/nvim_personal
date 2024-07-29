@@ -1,2 +1,1 @@
-como estara el clima hoy
-en general rodriguez, buenos aires
+Quiero subir un proyecto vue 3 a github pero hay carpetas y archivos que no se suben, como puedo hacer esto
