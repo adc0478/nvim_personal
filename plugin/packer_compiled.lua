@@ -79,6 +79,11 @@ _G.packer_plugins = {
     path = "/home/ariel/.local/share/nvim/site/pack/packer/start/BD",
     url = "/home/ariel/.config/nvim/proyectos_plug/BD"
   },
+  LuaSnip = {
+    loaded = true,
+    path = "/home/ariel/.local/share/nvim/site/pack/packer/start/LuaSnip",
+    url = "https://github.com/L3MON4D3/LuaSnip"
+  },
   ["PHP-Indenting-for-VIm"] = {
     loaded = true,
     path = "/home/ariel/.local/share/nvim/site/pack/packer/start/PHP-Indenting-for-VIm",
@@ -104,7 +109,7 @@ _G.packer_plugins = {
     url = "https://github.com/tjdevries/colorbuddy.vim"
   },
   ["completion-nvim"] = {
-    after = { "vim-vsnip-integ", "vim-vsnip" },
+    after = { "vim-vsnip", "vim-vsnip-integ" },
     loaded = false,
     needs_bufread = false,
     path = "/home/ariel/.local/share/nvim/site/pack/packer/opt/completion-nvim",
@@ -152,6 +157,11 @@ _G.packer_plugins = {
     path = "/home/ariel/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
+  ["mason.nvim"] = {
+    loaded = true,
+    path = "/home/ariel/.local/share/nvim/site/pack/packer/start/mason.nvim",
+    url = "https://github.com/williamboman/mason.nvim"
+  },
   nerdtree = {
     loaded = true,
     path = "/home/ariel/.local/share/nvim/site/pack/packer/start/nerdtree",
@@ -166,6 +176,16 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ariel/.local/share/nvim/site/pack/packer/start/nui.nvim",
     url = "https://github.com/MunifTanjim/nui.nvim"
+  },
+  ["nvim-lsp-installer"] = {
+    loaded = true,
+    path = "/home/ariel/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer",
+    url = "https://github.com/williamboman/nvim-lsp-installer"
+  },
+  ["nvim-lspconfig"] = {
+    loaded = true,
+    path = "/home/ariel/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
+    url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-treesitter"] = {
     loaded = true,
@@ -201,6 +221,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ariel/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ultisnips = {
+    loaded = true,
+    path = "/home/ariel/.local/share/nvim/site/pack/packer/start/ultisnips",
+    url = "https://github.com/SirVer/ultisnips"
   },
   ["vim-blade"] = {
     loaded = true,
@@ -243,6 +268,11 @@ _G.packer_plugins = {
     path = "/home/ariel/.local/share/nvim/site/pack/packer/start/vim-php-namespace",
     url = "https://github.com/arnaud-lb/vim-php-namespace"
   },
+  ["vim-snippets"] = {
+    loaded = true,
+    path = "/home/ariel/.local/share/nvim/site/pack/packer/start/vim-snippets",
+    url = "https://github.com/honza/vim-snippets"
+  },
   ["vim-vsnip"] = {
     load_after = {
       ["completion-nvim"] = true
@@ -276,6 +306,20 @@ time([[Config for glow.nvim]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
+pcall(vim.api.nvim_create_user_command, 'Dispatch', function(cmdargs)
+          require('packer.load')({'vim-dispatch'}, { cmd = 'Dispatch', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'vim-dispatch'}, {}, _G.packer_plugins)
+          return vim.fn.getcompletion('Dispatch ', 'cmdline')
+      end})
+pcall(vim.api.nvim_create_user_command, 'Make', function(cmdargs)
+          require('packer.load')({'vim-dispatch'}, { cmd = 'Make', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'vim-dispatch'}, {}, _G.packer_plugins)
+          return vim.fn.getcompletion('Make ', 'cmdline')
+      end})
 pcall(vim.api.nvim_create_user_command, 'Focus', function(cmdargs)
           require('packer.load')({'vim-dispatch'}, { cmd = 'Focus', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
         end,
@@ -297,26 +341,14 @@ pcall(vim.api.nvim_create_user_command, 'ALEEnable', function(cmdargs)
           require('packer.load')({'ale'}, {}, _G.packer_plugins)
           return vim.fn.getcompletion('ALEEnable ', 'cmdline')
       end})
-pcall(vim.api.nvim_create_user_command, 'Dispatch', function(cmdargs)
-          require('packer.load')({'vim-dispatch'}, { cmd = 'Dispatch', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
-        end,
-        {nargs = '*', range = true, bang = true, complete = function()
-          require('packer.load')({'vim-dispatch'}, {}, _G.packer_plugins)
-          return vim.fn.getcompletion('Dispatch ', 'cmdline')
-      end})
-pcall(vim.api.nvim_create_user_command, 'Make', function(cmdargs)
-          require('packer.load')({'vim-dispatch'}, { cmd = 'Make', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
-        end,
-        {nargs = '*', range = true, bang = true, complete = function()
-          require('packer.load')({'vim-dispatch'}, {}, _G.packer_plugins)
-          return vim.fn.getcompletion('Make ', 'cmdline')
-      end})
 time([[Defining lazy-load commands]], false)
 
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType cmake ++once lua require("packer.load")({'ale'}, { ft = "cmake" }, _G.packer_plugins)]]
+vim.cmd [[au FileType vim ++once lua require("packer.load")({'ale'}, { ft = "vim" }, _G.packer_plugins)]]
 vim.cmd [[au FileType sh ++once lua require("packer.load")({'ale'}, { ft = "sh" }, _G.packer_plugins)]]
 vim.cmd [[au FileType zsh ++once lua require("packer.load")({'ale'}, { ft = "zsh" }, _G.packer_plugins)]]
 vim.cmd [[au FileType bash ++once lua require("packer.load")({'ale'}, { ft = "bash" }, _G.packer_plugins)]]
@@ -326,8 +358,6 @@ vim.cmd [[au FileType html ++once lua require("packer.load")({'ale'}, { ft = "ht
 vim.cmd [[au FileType markdown ++once lua require("packer.load")({'ale'}, { ft = "markdown" }, _G.packer_plugins)]]
 vim.cmd [[au FileType racket ++once lua require("packer.load")({'ale'}, { ft = "racket" }, _G.packer_plugins)]]
 vim.cmd [[au FileType tex ++once lua require("packer.load")({'ale'}, { ft = "tex" }, _G.packer_plugins)]]
-vim.cmd [[au FileType vim ++once lua require("packer.load")({'ale'}, { ft = "vim" }, _G.packer_plugins)]]
-vim.cmd [[au FileType cmake ++once lua require("packer.load")({'ale'}, { ft = "cmake" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)

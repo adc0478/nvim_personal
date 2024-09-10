@@ -4,6 +4,7 @@ local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
 vim.keymap.set('n','<leader>w',"<cmd>:w<Cr>",opts)
+vim.keymap.set('n','<C-n>',"<cmd>:wincmd w<CR>",opts)
 vim.keymap.set('n','<leader>b',"<cmd>:BuffergatorToggle<Cr>",opts)
 vim.keymap.set('n','<C-q>',"<cmd>:q<Cr>",opts)
 vim.keymap.set('n','<leader>nt',"<cmd>:NERDTreeFind<Cr>",opts)

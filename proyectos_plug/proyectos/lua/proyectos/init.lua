@@ -75,7 +75,7 @@ function cargar_proyectos(nombre)
    vim.api.nvim_command("e /opt/lampp/htdocs/".. nombre .. "/")
    vim.g.proyecto = nombre
    if not os.rename("/home/ariel/mysqld.sock","/home/ariel/mysqld.sock") then
-       vim.api.nvim_command("!ln -s /opt/lampp/var/mysql/mysql.sock /home/ariel/mysqld.sock")
+       vim.api.nvim_command("!ln -s /run/mysql/mysql.sock /home/ariel/mysqld.sock")
    end
 end
 

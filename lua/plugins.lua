@@ -70,20 +70,23 @@ use {
   'nvim-lualine/lualine.nvim',
   requires = { 'kyazdani42/nvim-web-devicons', opt = true }
 }
---use {
---    "williamboman/nvim-lsp-installer",
---    "neovim/nvim-lspconfig",
---}
+--For ultisnips users.
+use 'SirVer/ultisnips'
+use {
+    "williamboman/nvim-lsp-installer",
+    "neovim/nvim-lspconfig",
+}
 --use{
-  --'hrsh7th/nvim-cmp',
-  --requires = {
-   -- 'hrsh7th/cmp-nvim-lsp',
-    --'hrsh7th/cmp-buffer',
-    --'hrsh7th/cmp-path',
-   -- 'hrsh7th/cmp-cmdline',
-    --'quangnguyen30192/cmp-nvim-ultisnips'
-  --}
+--  'hrsh7th/nvim-cmp',
+--  requires = {
+--    'hrsh7th/cmp-nvim-lsp',
+--    'hrsh7th/cmp-buffer',
+--    'hrsh7th/cmp-path',
+--    'hrsh7th/cmp-cmdline',
+--    'quangnguyen30192/cmp-nvim-ultisnips'
+--  }
 --}
+
 
 use "EdenEast/nightfox.nvim"
 use 'preservim/nerdtree'
@@ -118,10 +121,23 @@ use {
 -- or                            , branch = '0.1.x',
   requires = { {'nvim-lua/plenary.nvim'} }
 }
+use {
+        'honza/vim-snippets'
+}
+use({
+	"L3MON4D3/LuaSnip",
+	-- follow latest release.
+	tag = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+	-- install jsregexp (optional!:).
+	run = "make install_jsregexp"
+})
 use {'/home/ariel/.config/nvim/proyectos_plug/proyectos'}
 use {'/home/ariel/.config/nvim/proyectos_plug/BD'}
 use {'/home/ariel/.config/nvim/proyectos_plug/gemini'}
 
 use {"ellisonleao/glow.nvim", config = function() require("glow").setup() end}
+use {
+    "williamboman/mason.nvim"
+}
 end)
 

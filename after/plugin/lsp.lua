@@ -40,26 +40,11 @@ local lsp_flags = {
   -- This is the default in Nvim 0.7+
   debounce_text_changes = 150,
 }
-require('lspconfig')['pyright'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
-}
 require('lspconfig')['tsserver'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
 }
-require('lspconfig')['rust_analyzer'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
-    -- Server-specific settings...
-    settings = {
-      ["rust-analyzer"] = {}
-    }
-}
-lspconfig.intelephense.setup{
-  on_attach = on_attach,
-  flags = lsp_flags
-}
+
 
 require("nvim-lsp-installer").setup({
     automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
@@ -89,13 +74,6 @@ configs.blade = {
 lspconfig.blade.setup{
   -- Capabilities is specific to my setup.
   capabilities = capabilities
-}
-require'lspconfig'.phpactor.setup{
-    on_attach = on_attach,
-    init_options = {
-        ["language_server_phpstan.enabled"] = false,
-        ["language_server_psalm.enabled"] = false,
-    }
 }
 
 

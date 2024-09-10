@@ -1,1 +1,1 @@
-Quiero subir un proyecto vue 3 a github pero hay carpetas y archivos que no se suben, como puedo hacer esto
+como personalizar la pantalla de inicio de nvim{

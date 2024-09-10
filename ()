@@ -1,0 +1,16 @@
+" Press ? for help
+
+.. (up a dir)
+/home/ariel/.config/nvim/
+▸ after/
+▸ lua/
+▸ main/
+▸ plugin/
+▸ proyectos_plug/
+▸ setup_nvim/
+  aaa.html
+  coc-settings.json
+  index.html
+  init.lua
+  tags
+  test.php
